@@ -1,0 +1,26 @@
+<html>
+<head>
+	<link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='css/normalize.css') }}"/>
+	<link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='fonts/font-awesome-4.2.0/css/font-awesome.min.css') }}"/>
+	<link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='css/demo.css') }}"/>
+	<link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='css/component.css') }}"/>
+	<link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='css/beauty.css') }}"/>
+</head>
+<body style="background-color:#383c3c;">
+
+<form method="post" action=''>
+	<div style="text-align:center;margin-top: 50px;">
+		<label class='Title'>MBTI PREDICTION</label>
+	</div>
+    <div style="text-align:center; overflow: hidden;margin:50px;">
+    	<textarea class='text' name='sentence' placeholder="Input some text..."></textarea>
+    </div>
+    <div style="text-align:center;">
+    	<button type="submit" value="submit"  name="submit"  class="button"><span>Predict!</span></button>
+    </div>
+</form>
+
+    
+<script type="text/javascript" color="255,255,255" opacity='1' zIndex="-1" count="120" src="http://cdn.bootcss.com/canvas-nest.js/1.0.1/canvas-nest.min.js"></script>
+</body>
+</html>

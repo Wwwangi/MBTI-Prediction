@@ -1,0 +1,56 @@
+
+.text{
+	border:0;
+	border-radius:5px;
+	background-color:rgba(241,241,241,.98);
+	width: 500px;
+	height: 300px;
+	padding: 10px;
+	resize: none;
+	overflow-y:visible;
+	outline:none;
+}
+
+
+.Title{
+	color: white;
+	font-size: 50px;
+	align-self: center;
+}
+
+.button {
+    background-color: #ff6781;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 12px;
+}
+
+.button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.button span:after {
+  content: '»';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.button:hover span {
+  padding-right: 25px;
+}
+
+.button:hover span:after {
+  opacity: 1;
+  right: 0;
+}

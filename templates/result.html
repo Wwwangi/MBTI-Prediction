@@ -1,0 +1,19 @@
+<html>
+<head>
+	<link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='css/beauty.css') }}"/>
+</head>
+<body style="background-color:#383c3c;">
+
+<div style="text-align:center;margin-top: 50px;">
+	<h1 style="color:white; font-size: 50px;">{{result}} - {{ptype}}</h1>
+	<button class="button" style="float:right; margin-right: 30px;" type="button" onclick="window.location.href='{{ url_for( '.index') }}';"><span>Try again?</span></button>
+</div>
+
+<div style="width:1350;text-align:center;">
+<img src={{image}} style=" width:'20px'; height:'20px'; ">
+</div>
+
+    
+<script type="text/javascript" color="255,255,255" opacity='1' zIndex="-1" count="120" src="http://cdn.bootcss.com/canvas-nest.js/1.0.1/canvas-nest.min.js"></script>
+</body>
+</html>
