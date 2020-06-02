@@ -1,9 +1,10 @@
 from flask import Flask, render_template, request,url_for, redirect
+from waitress import serve
 import string
 from string import digits
-import nltk
-from nltk.corpus import stopwords 
-from nltk.tokenize import word_tokenize 
+#from nltk.corpus import stopwords 
+#from nltk.tokenize import word_tokenize 
+from spacy.lang.en import English
 import re
 import joblib
 
@@ -40,13 +41,18 @@ def load_model():
 	ei_model=joblib.load("model/EI.m")
 
 def pre_processing(sentence):
-	stop_words = set(stopwords.words('english')) 
+	#stop_words = set(stopwords.words('english')) 
+	stop_words = set(["i", "me", "my", "myself", "we", "our", "ours", "ourselves", "you", "your", "yours", "yourself", "yourselves", "he", "him", "his", "himself", "she", "her", "hers", "herself", "it", "its", "itself", "they", "them", "their", "theirs", "themselves", "what", "which", "who", "whom", "this", "that", "these", "those", "am", "is", "are", "was", "were", "be", "been", "being", "have", "has", "had", "having", "do", "does", "did", "doing", "a", "an", "the", "and", "but", "if", "or", "because", "as", "until", "while", "of", "at", "by", "for", "with", "about", "against", "between", "into", "through", "during", "before", "after", "above", "below", "to", "from", "up", "down", "in", "out", "on", "off", "over", "under", "again", "further", "then", "once", "here", "there", "when", "where", "why", "how", "all", "any", "both", "each", "few", "more", "most", "other", "some", "such", "no", "nor", "not", "only", "own", "same", "so", "than", "too", "very", "s", "t", "can", "will", "just", "don", "should", "now"])
+	nlp = English()
+	tokenizer = nlp.Defaults.create_tokenizer(nlp)
 	punc=string.punctuation
 	sentence=sentence.lower()
 	sentence=remove_urls(sentence)
 	sentence=sentence.translate(str.maketrans('', '', string.punctuation))
 	sentence=sentence.translate(str.maketrans('', '', digits))
-	word_tokens = word_tokenize(sentence) 
+	#word_tokens = word_tokenize(sentence) 
+	word_token=tokenizer(sentence)
+	word_tokens=[x.text for x in word_token]
 	preProcessedSentence = [w for w in word_tokens if not w in stop_words]
 	preProcessedSentence=' '.join(preProcessedSentence) 
 	return preProcessedSentence
@@ -95,6 +101,7 @@ def pred(preProcessedSentence):
 		ans+='J'
 
 	return ans
+
 
 @app.route('/', methods=['get', 'post'])
 def index():
@@ -164,14 +171,7 @@ def result():
 	return render_template('result.html',result=result,image=image,ptype=ptype)
 
 
-# @app.route('/', methods=['get', 'post'])
-# def again():
-# 	return 'again!'
-# 	# tryagain = request.form.get('TryAgain')
-# 	# print(tryagain)
-# 	return redirect("index0.html")
-
-
 if __name__ == '__main__':
 	load_model()
-	app.run(host='127.0.0.1', port=8080, debug=True)
+	#app.run(host='127.0.0.1', port=8080, debug=True)
+	serve(app, host='0.0.0.0', port=80)
